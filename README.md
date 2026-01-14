@@ -1,1 +1,33 @@
 # qa_python
+
+# Список реализованных тестов для класса `BooksCollector`
+- test_add_new_book_add_two_books
+    - проверяет добавление двух книг
+- test_add_new_book_new_book_has_empty_genre
+    - проверяет, что книга имеет пустой жанр после добавления
+- test_add_new_book_add_same_book_twice_book_is_present_only_once_in_collector
+    - проверяет, что книга не дублируется в коллекторе при нескольких вызовах метода `add_new_book`
+- test_add_new_book_book_title_is_empty_book_is_not_added_to_collector
+    - проверяет, что книга с пустым именем не добавляется в коллектор
+- test_add_new_book_book_title_is_between_0_and_41_characters_long_book_is_added_to_collection
+    - проверяет, что книга с допустимым количеством символов в имени добавляется в коллектор
+- test_add_new_book_book_title_is_more_than_41_characters_long_book_is_not_added_to_collection
+    - проверяет, что книга со слишком большим названием не добавляется в коллектор
+- test_set_book_genre_book_and_genre_is_present_in_collector_genre_is_successfully_set
+    - проверяет, что жанр успешно проставляется для книги в коллекторе
+- test_set_book_genre_genre_is_not_present_in_collector_genre_is_not_set
+    - проверяет, что жанр книги остается пустым, если коллектор не поддерживает переданный жанр
+- test_get_book_genre_book_is_added_to_collector_returns_book_genre
+    - проверяет, что жанр книги можно получить через метод `get_book_genre`
+- test_get_books_with_specific_genre_collector_has_books_with_specific_genre_returns_books_with_specific_genre
+    - проверяет, что метод `get_books_with_specific_genre` возвращает книги ожидаемого жанра при их наличии в коллекторе
+- test_get_books_with_specific_genre_no_books_with_specific_genre_returns_empty_list
+    - проверяет, что метод `get_books_with_specific_genre` возвращает пустой список, если книг ожидаемого жанра нет в коллекторе
+- test_get_books_for_children_collector_has_books_of_child_genre_returns_appropriate_book_titles
+    - проверяет, что метод `get_books_for_children` возвращает книги для детей при их наличии в коллекторе
+- test_get_books_for_children_collector_does_not_have_books_of_child_genre_returns_empty_list
+    - проверяет, что метод `get_books_for_children` возвращает пустой список при отсутствии детских книг в коллекторе
+- test_add_book_in_favorites_collector_has_book_book_is_added_to_favorites
+    - проверяет, что книгу из коллектора можно добавить в избранное
+- test_delete_book_from_favorites_collector_has_book_in_favorites_book_is_removed_from_favorites
+    - проверяет, что книгу из коллектора, уже добавленную в избранное, можно удалить из избранного
