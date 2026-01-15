@@ -9,10 +9,7 @@ class TestBooksCollector:
     # обязательно указывать префикс test_
     # дальше идет название метода, который тестируем add_new_book_
     # затем, что тестируем add_two_books - добавление двух книг
-    def test_add_new_book_add_two_books(self):
-        # создаем экземпляр (объект) класса BooksCollector
-        collector = BooksCollector()
-
+    def test_add_new_book_add_two_books(self, collector):
         # добавляем две книги
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Что делать, если ваш кот хочет вас убить')
@@ -32,16 +29,12 @@ class TestBooksCollector:
             'Мастер и Маргарита'
         ]
     )
-    def test_add_new_book_new_book_has_empty_genre(self, book_title):
-        collector = BooksCollector()
-
+    def test_add_new_book_new_book_has_empty_genre(self, collector, book_title):
         collector.add_new_book(book_title)
 
         assert collector.get_books_genre()[book_title] == ''
 
-    def test_add_new_book_add_same_book_twice_book_is_present_only_once_in_collector(self):
-        collector = BooksCollector()
-
+    def test_add_new_book_add_same_book_twice_book_is_present_only_once_in_collector(self, collector):
         book_title = 'Преступление и наказание'
 
         collector.add_new_book(book_title)
@@ -51,9 +44,7 @@ class TestBooksCollector:
 
         assert len(books) == 1 and books[book_title] == ''
 
-    def test_add_new_book_book_title_is_empty_book_is_not_added_to_collector(self):
-        collector = BooksCollector()
-
+    def test_add_new_book_book_title_is_empty_book_is_not_added_to_collector(self, collector):
         collector.add_new_book('')
 
         books = collector.get_books_genre()
@@ -69,9 +60,7 @@ class TestBooksCollector:
             40
         ]
     )
-    def test_add_new_book_book_title_is_between_0_and_41_characters_long_book_is_added_to_collection(self, book_title_length):
-        collector = BooksCollector()
-
+    def test_add_new_book_book_title_is_between_0_and_41_characters_long_book_is_added_to_collection(self, collector, book_title_length):
         book_title = 'x' * book_title_length
 
         collector.add_new_book(book_title)
@@ -89,9 +78,7 @@ class TestBooksCollector:
             11014
         ]
     )
-    def test_add_new_book_book_title_is_more_than_41_characters_long_book_is_not_added_to_collection(self, book_title_length):
-        collector = BooksCollector()
-
+    def test_add_new_book_book_title_is_more_than_41_characters_long_book_is_not_added_to_collection(self, collector, book_title_length):
         collector.add_new_book('x' * book_title_length)
 
         books = collector.get_books_genre()
@@ -108,9 +95,7 @@ class TestBooksCollector:
             'Комедии'
         ]
     )
-    def test_set_book_genre_book_and_genre_is_present_in_collector_genre_is_successfully_set(self, genre):
-        collector = BooksCollector()
-
+    def test_set_book_genre_book_and_genre_is_present_in_collector_genre_is_successfully_set(self, collector, genre):
         book_title = 'Братья Карамазовы'
 
         collector.add_new_book(book_title)
@@ -129,9 +114,7 @@ class TestBooksCollector:
             'Трагикомедия'
         ]
     )
-    def test_set_book_genre_genre_is_not_present_in_collector_genre_is_not_set(self, genre):
-        collector = BooksCollector()
-
+    def test_set_book_genre_genre_is_not_present_in_collector_genre_is_not_set(self, collector, genre):
         book_title = 'Братья Карамазовы'
 
         collector.add_new_book(book_title)
@@ -140,9 +123,7 @@ class TestBooksCollector:
 
         assert collector.get_books_genre()[book_title] == ''
     
-    def test_get_book_genre_book_is_added_to_collector_returns_book_genre(self):
-        collector = BooksCollector()
-
+    def test_get_book_genre_book_is_added_to_collector_returns_book_genre(self, collector):
         book_title = 'Братья Карамазовы'
 
         collector.add_new_book(book_title)
@@ -157,9 +138,7 @@ class TestBooksCollector:
             ['Воскресение', 'Детективы']
         ]
     )
-    def test_get_books_with_specific_genre_collector_has_books_with_specific_genre_returns_books_with_specific_genre(self, book_title, book_genre):
-        collector = BooksCollector()
-
+    def test_get_books_with_specific_genre_collector_has_books_with_specific_genre_returns_books_with_specific_genre(self, collector, book_title, book_genre):
         collector.add_new_book(book_title)
         collector.set_book_genre(book_title, book_genre)
 
@@ -175,9 +154,7 @@ class TestBooksCollector:
             ['Воскресение', 'Детективы', 'Фантастика']
         ]
     )
-    def test_get_books_with_specific_genre_no_books_with_specific_genre_returns_empty_list(self, book_title, book_genre, searched_genre):
-        collector = BooksCollector()
-
+    def test_get_books_with_specific_genre_no_books_with_specific_genre_returns_empty_list(self, collector, book_title, book_genre, searched_genre):
         collector.add_new_book(book_title)
         collector.set_book_genre(book_title, book_genre)
 
@@ -193,9 +170,7 @@ class TestBooksCollector:
             ['Марс атакует!', 'Комедии']
         ]
     )
-    def test_get_books_for_children_collector_has_books_of_child_genre_returns_appropriate_book_titles(self, book_title, book_genre):
-        collector = BooksCollector()
-
+    def test_get_books_for_children_collector_has_books_of_child_genre_returns_appropriate_book_titles(self, collector, book_title, book_genre):
         collector.add_new_book(book_title)
         collector.set_book_genre(book_title, book_genre)
 
@@ -210,44 +185,26 @@ class TestBooksCollector:
             ['Твин Пикс', 'Детективы']
         ]
     )
-    def test_get_books_for_children_collector_does_not_have_books_of_child_genre_returns_empty_list(self, book_title, book_genre):
-        collector = BooksCollector()
-
+    def test_get_books_for_children_collector_does_not_have_books_of_child_genre_returns_empty_list(self, collector, book_title, book_genre):
         collector.add_new_book(book_title)
         collector.set_book_genre(book_title, book_genre)
 
         child_books = collector.get_books_for_children()
 
         assert len(child_books) == 0
-    
-    @pytest.mark.parametrize(
-        'books, favorite_book_title',
-        [
-            [['Кэрри', 'Сияние', 'Мизери'], 'Сияние'],
-        ]
-    )
-    def test_add_book_in_favorites_collector_has_book_book_is_added_to_favorites(self, books, favorite_book_title):
-        collector = BooksCollector()
 
-        for book in books:
-            collector.add_new_book(book)
-        
+    def test_add_book_in_favorites_collector_has_book_book_is_added_to_favorites(self, collector):
+        favorite_book_title = 'Сияние'
+        collector.add_new_book(favorite_book_title)
+
         collector.add_book_in_favorites(favorite_book_title)
 
         assert favorite_book_title in collector.get_list_of_favorites_books()
 
-    @pytest.mark.parametrize(
-        'books, favorite_book_title',
-        [
-            [['Хоббит', 'Властелин колец', 'Сильмариллион'], 'Сильмариллион'],
-        ]
-    )
-    def test_delete_book_from_favorites_collector_has_book_in_favorites_book_is_removed_from_favorites(self, books, favorite_book_title):
-        collector = BooksCollector()
+    def test_delete_book_from_favorites_collector_has_book_in_favorites_book_is_removed_from_favorites(self, collector):
+        favorite_book_title = 'Властелин колец'
+        collector.add_new_book(favorite_book_title)
 
-        for book in books:
-            collector.add_new_book(book)
-        
         collector.add_book_in_favorites(favorite_book_title)
         collector.delete_book_from_favorites(favorite_book_title)
 
